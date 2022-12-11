@@ -6,4 +6,3 @@ export class GetOrdersFilterDto {
   search: string;
 }
 
-///es8
