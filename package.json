@@ -1,26 +1,33 @@
 {
   "name": "ecommerce_app",
-  "version": "0.0.1",
   "description": "nest express testing",
+  "version": "0.0.1",
+  "engines": {
+    "npm": "7.x"
+  },
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "main": "src/main.ts",
   "author": "",
   "private": true,
-  "license": "LICENSED",
+  "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build --output public",
+    "heroku-postbuild": "ng build --prod",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "start:prod": "node dist/main.js"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.4.0",
@@ -47,6 +54,7 @@
     "config": "^3.3.8",
     "cron": "^2.1.0",
     "cron-schedule": "^3.0.6",
+    "debug": "^4.3.4",
     "dotenv": "^16.0.3",
     "env": "^0.0.2",
     "express-session": "^1.17.3",
