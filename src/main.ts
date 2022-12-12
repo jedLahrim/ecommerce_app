@@ -3,6 +3,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { TransformInterceptor } from './transform.interceptor';
 import { ConfigService } from '@nestjs/config';
+import * as process from 'process';
 
 async function bootstrap() {
   const service = new ConfigService();
@@ -19,7 +20,7 @@ async function bootstrap() {
   //   logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
   // }
 
-  const port = service.get('PORT');
+  const port = process.env.PORT || 3399;
   await app.listen(port);
   logger.log(`Application listening on port ${port}`);
 }
