@@ -16,7 +16,6 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build --output public",
-    "heroku-postbuild": "ng build --prod",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
