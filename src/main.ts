@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger, ValidationPipe } from "@nestjs/common";
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
-import { TransformInterceptor } from "./transform.interceptor";
+import { TransformInterceptor } from './transform.interceptor';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
+  const service = new ConfigService();
   const logger = new Logger('bootstrap');
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
@@ -17,8 +19,9 @@ async function bootstrap() {
   //   logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
   // }
 
-  const port = 3399;
+  const port = service.get('PORT');
   await app.listen(port);
   logger.log(`Application listening on port ${port}`);
 }
+
 bootstrap();

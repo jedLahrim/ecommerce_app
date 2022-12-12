@@ -1,10 +1,11 @@
 {
   "name": "ecommerce_app",
   "version": "0.0.1",
-  "description": "",
+  "description": "nest express testing",
+  "main": "src/main.ts",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "LICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build --output public",
