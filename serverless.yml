@@ -1,0 +1,42 @@
+# serverless.yml
+
+provider:
+  name: aws
+  # Default stage (default: dev)
+  stage: dev
+  # Default region (default: us-east-1)
+  region: us-east-1
+  # The AWS profile to use to deploy (default: "default" profile)
+  profile: production
+  # Use a custom name for the CloudFormation stack
+  stackName: custom-stack-name
+  # Optional CloudFormation tags to apply to APIs and functions
+  tags:
+    foo: bar
+    baz: qux
+  # Optional CloudFormation tags to apply to the stack
+  stackTags:
+    key: value
+  # Method used for CloudFormation deployments: 'changesets' or 'direct' (default: changesets)
+  # See https://www.serverless.com/framework/docs/providers/aws/guide/deploying#deployment-method
+  deploymentMethod: direct
+  # List of existing Amazon SNS topics in the same region where notifications about stack events are sent.
+  notificationArns:
+    - 'arn:aws:sns:us-east-1:XXXXXX:mytopic'
+  stackParameters:
+    - ParameterKey: 'MyKey'
+      ParameterValue: 'Value'
+  # Disable automatic rollback by CloudFormation on failure. To be used for non-production environments.
+  disableRollback: true
+  rollbackConfiguration:
+    MonitoringTimeInMinutes: 20
+    RollbackTriggers:
+      - Arn: arn:aws:cloudwatch:us-east-1:000000000000:alarm:health
+        Type: AWS::CloudWatch::Alarm
+      - Arn: arn:aws:cloudwatch:us-east-1:000000000000:alarm:latency
+        Type: AWS::CloudWatch::Alarm
+  tracing:
+    # Can only be true if API Gateway is inside a stack.
+    apiGateway: true
+    # Optional, can be true (true equals 'Active'), 'Active' or 'PassThrough'
+    lambda: true
