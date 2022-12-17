@@ -20,7 +20,7 @@ async function bootstrap() {
   //   logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
   // }
 
-  const port = process.env.PORT || 3000;
+  const port = 3399;
   await app.listen(port);
   logger.log(`Application listening on port ${port}`);
 }

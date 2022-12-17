@@ -1,12 +1,7 @@
 {
   "name": "ecommerce_app",
-  "description": "nest express testing",
   "version": "0.0.1",
-  "version": "1.0.0",
-  "engines": {
-    "node": "19.0.1"
-  },
-  "main": "src/main.ts",
+  "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
