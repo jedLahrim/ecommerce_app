@@ -8,7 +8,9 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -20,6 +22,8 @@ import { PaginatedResult } from './dto/paginated-result.dto';
 import { Product } from './entity/product.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { GetProductsFilterDto } from './dto/get-product.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { UploadProductAttachmentDto } from './dto/upload-product-attachment.dto';
 
 @Controller('product')
 @UseGuards(AuthGuard('jwt'))
@@ -40,9 +44,25 @@ export class ProductController {
     return this.productService.getTasksWithPagination(getProductsPaginationDto);
   }
 
+  // @Get('/:id')
+  // getProductsById(@Param('id', ParseIntPipe) id: string): Promise<Product> {
+  //   return this.productService.getProductById(id);
+  // }
+
+  @Post('/:upload')
+  @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(FileInterceptor('file'))
+  async upload(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() uploadAttachmentDto: UploadProductAttachmentDto,
+  ) {
+    return await this.productService.uploadFile(file, uploadAttachmentDto);
+  }
+
   @Get('/:id')
-  getProductsById(@Param('id', ParseIntPipe) id: string): Promise<Product> {
-    return this.productService.getProductById(id);
+  @UseGuards(AuthGuard('jwt'))
+  async download(@Param('id') id: string) {
+    return await this.productService.download(id);
   }
 
   @Post()
